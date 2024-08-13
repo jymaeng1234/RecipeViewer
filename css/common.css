@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body > * {
+  border: 1px solid red;
+}
+
+body {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  margin: auto;
+}
+
+.hd {
+  position: relative;
+  height: 50%;
+}
+
+.hdCon > * {
+  border: 1px solid green;
+}
+
+main {
+  position: relative;
+  height: 45%;
+}
+
+footer {
+  position: relative;
+  height: 5%;
+}
+
+/* main {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  height: 70%;
+} */
