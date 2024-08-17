@@ -24,16 +24,11 @@ let currentQuery = null;
 const fetchRecipes = async (startIdx = 1, endIdx = 9) => {
   try {
     let requestUrl = `${url}/${startIdx}/${endIdx}`;
-
-    console.log("url:", requestUrl);
     const res = await fetch(requestUrl);
     const data = await res.json();
-    console.log("data", data);
 
     recipeList = data.COOKRCP01.row;
     renderRecipes(recipeList);
-
-    console.log("ttt", recipeList);
   } catch (e) {
     console.error(e);
   }
