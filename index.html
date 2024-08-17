@@ -4,71 +4,151 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>미식의 서재</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./css/myreset.css" />
     <link rel="stylesheet" href="./css/common.css" />
+    <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon" />
+    <script src="./js/apikey.js" defer></script>
     <script src="./js/common.js" defer></script>
   </head>
   <body>
     <header class="hd" id="hd">
-      <div class="hdCon">
-        <div class="logo" id="hdLogo">
-          <img src="" alt="" id="hdImg" />
-          <h1>미식의 서재</h1>
-        </div>
-        <div class="mainImgCon">
-          <h2>you don't know what to cook today?</h2>
-          <p>Try a surprise recipe</p>
-        </div>
-        <div class="search">
-          <input type="text" placeholder="재료 검색" />
-          <i>검색</i>
-          <button id="randBtn">오늘의 추천메뉴는~?</button>
-        </div>
-        <nav id="navCategory">
-          <button>전체</button>
-          <button>반찬</button>
-          <button>국&찌개</button>
-          <button>후식</button>
-        </nav>
+      <div class="logoCon">
+        <img src="./img/logo2.svg" alt="" id="logo" />
       </div>
+      <div class="banner" id="banner"></div>
     </header>
     <main id="main">
       <section class="mainSec">
-        <div class="recipeListCon">
-          <ul id="recipeUl">
-            <li>
-              <img src="./img1.png" alt="" />
-              <p>요리 이름1</p>
-              <p>200kcal</p>
-              <p>카테고리1</p>
-            </li>
-            <li>
-              <img src="./img1.png" alt="" />
-              <p>요리 이름2</p>
-              <p>200kcal</p>
-              <p>카테고리2</p>
-            </li>
-            <li>
-              <img src="./img1.png" alt="" />
-              <p>요리 이름3</p>
-              <p>200kcal</p>
-              <p>카테고리3</p>
-            </li>
-            <li>
-              <img src="./img1.png" alt="" />
-              <p>요리 이름4</p>
-              <p>200kcal</p>
-              <p>카테고리4</p>
-            </li>
-          </ul>
+        <div class="search">
+          <input
+            id="inputSearch"
+            type="text"
+            placeholder="음식 이름 또는 재료를 검색하세요"
+          />
+          <i class="fa-solid fa-magnifying-glass" id="searchBtn"></i>
         </div>
+        <h2>카테고리</h2>
+        <div class="categoryList">
+          <div class="category" id="category1">
+            <p>전체</p>
+          </div>
+          <div class="category" id="category2">
+            <p>밥</p>
+          </div>
+          <div class="category" id="category3">
+            <p>반찬</p>
+          </div>
+          <div class="category" id="category4">
+            <p>국/찌개</p>
+          </div>
+          <div class="category" id="category5">
+            <p>일품</p>
+          </div>
+          <div class="category" id="category6">
+            <p>후식</p>
+          </div>
+        </div>
+
+        <div class="cardListCon" id="cardListCon">
+          <!-- <div class="card" id="card1">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름1</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리1</p>
+            </div>
+          </div>
+
+          <div class="card" id="card2">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름2</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리2</p>
+            </div>
+          </div>
+          <div class="card" id="card3">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름3</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리3</p>
+            </div>
+          </div>
+          <div class="card" id="card4">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./img/recipe1.png" alt="" />
+            <h3>요리 이름4</h3>
+            <div>
+              <strong>200kcal</strong>
+              <p>카테고리4</p>
+            </div>
+          </div> -->
+        </div>
+
         <!-- pagination -->
+        <div class="pageCon">
+          <button class="prev">이전</button>
+          <button class="on">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button class="next">다음</button>
+        </div>
       </section>
     </main>
     <footer id="footer">
-      <div class="footerBtn">
-        <img src="" alt="" id="fotterImg" />
-        <p>미식의 서재</p>
+      <div class="footCon">
+        <img src="./img/social_facebook.svg" alt="" />
+        <img src="./img/social_instar.svg" alt="" />
+        <img src="./img/social_mail.svg" alt="" />
       </div>
     </footer>
   </body>
