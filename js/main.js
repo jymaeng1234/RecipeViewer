@@ -38,7 +38,7 @@ const createHtml = (recipe) => {
             <h3>${title}</h3>
             <div>
               <strong>${calorie}kcal</strong>
-              <p>${category}</p>
+              <p class="cate">${category}</p>
             </div>
           </div>`;
 };
@@ -63,10 +63,6 @@ const createHtml = (recipe) => {
 };
 */
 
-function showRullet() {}
-
-function searchRecipe() {}
-
 const init = () => {
   loadRecipes();
 };
@@ -87,8 +83,6 @@ const loadRecipes = async (rcp_pat = null, startIdx = 1, endIdx = 9) => {
     console.error(e);
   }
 };
-
-init();
 
 const LoadRecipe = (i) => {
   switch (i.srcElement.id) {
@@ -118,6 +112,33 @@ const LoadRecipe = (i) => {
       break;
   }
 };
+
+const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
+  try {
+    let requestUrl =
+      rcp_nm === null
+        ? `${url}/${startIdx}/${endIdx}`
+        : `${url}/${startIdx}/${endIdx}/RCP_NM=${rcp_nm}`;
+
+    const res = await fetch(requestUrl);
+    const data = await res.json();
+
+    recipeList = data.COOKRCP01.row;
+    renderRecipes(recipeList);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const searchRecipe = (e) => {
+  if (e.key === "Enter") {
+    loadRecipesByName($search.value);
+  }
+};
+
+const showRullet = () => {};
+
+// init();
 
 $banner.addEventListener("click", showRullet);
 $search.addEventListener("keydown", searchRecipe);

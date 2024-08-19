@@ -58,6 +58,10 @@ h2 {
   background-size: 50%;
 }
 
+.category.on {
+  background-color: var(--main3-color);
+}
+
 .category:hover {
   background-color: var(--main3-color);
 }
