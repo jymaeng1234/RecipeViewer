@@ -51,7 +51,7 @@ const createHtml = (recipe) => {
             <h3>${title}</h3>
             <div>
               <strong>${calorie}kcal</strong>
-              <p class='cate'>${category}</p>
+              <p>${category}</p>
               <a class="recipelink" href="./detail_${recipeIndex}&recipeNme=${title}.html">바로가기</a>
             </div>
           </div>`;
