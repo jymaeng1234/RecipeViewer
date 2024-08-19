@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/detail2.css" />
+    <script src="./js/detail.js" defer></script>
+  </head>
+  <body>
+    <header class="hd" id="hd">
+      <div class="logoCon">
+        <img src="./img/logo2.svg" alt="" id="logo" />
+      </div>
+      <div class="banner" id="banner"></div>
+    </header>
+    <main>
+      <section class="titleSection">
+        <span class="cate">반찬</span>
+        <div class="titleWrap">
+          <h1 id="menuName"></h1>
+          <div class="btns">
+            <i class="fa-solid fa-bookmark"></i>
+            <i class="fa-solid fa-share-nodes"></i>  
+          </div>
+        </div>
+      </section>
+
+      <section class="mainSection">
+        <div class="mainLeft">
+          <img src="./img/noimage.png" alt="" />
+          <div class="ingredients">
+            <h2>재료</h2>
+            <input type="checkbox" id="item1" />
+            <label for="item1"> 딸기 70g(7개)<br /></label>
+            <input type="checkbox" id="item2" />
+            <label for="item2"> 플레인 요거트 85g(1개) <br /></label>
+            
+            <input type="checkbox" /> 양상추 70g (2장) <br />
+            <input type="checkbox" /> 메추리알 30g(3개)<br />
+            <input type="checkbox" /> 블루베리 15g(1큰술)<br />
+            <input type="checkbox" /> 식초 약간<br />
+            <input type="checkbox" /> 소금 약간 <br />
+          </div>
+        </div>
+
+        <div class="mainRight">
+          <div class="calorieInfo">
+            <p class="calItem">영양성분</p>
+            <p class="calItem calKey">칼로리</p>
+            <p class="calItem calValue">200kal</p>
+            <p class="calItem calKey">탄수화물</p>
+            <p class="calItem calValue">40g</p>
+            <p class="calItem calKey">지방</p>
+            <p class="calItem calValue">4g</p>
+            <p class="calItem calKey">단백질</p>
+            <p class="calItem calValue">1g</p>
+            <p class="calItem calKey">나트륨</p>
+            <p class="calItem calValue">1000mg</p>
+          </div>
+
+          <div class="recipeTip">
+            <div class="tipTitle">
+              <i class="fa-solid fa-lightbulb"></i>
+              <strong> 저감 조리법 TIP</strong>
+            </div>
+
+            <p>
+              딸기는 칼륨이 풍부하여 나트륨 배출에 뛰어나지만 칼슘이 부족한
+              과일이에요 그렇기 때문에 칼슘이 풍부한 요거트나 기타 유제품과 함께
+              섭취하면 좋아요
+            </p>
+          </div>
+
+          <div class="recipeTag">
+            <strong>태그</strong>
+            <p>#딸기</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cookingSteps">
+        <h3>조리 순서</h6>
+        <ul class="steps">
+          <li class="step">
+            <img src="./img/recipe1.png" alt="" />
+            <p class="idx">1</p>
+            <p class="explain">
+              찬물이 담긴 냄비에 식초,소금을 넣고 메추리알을 삶는다. 물이
+              끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로
+              자른다.
+            </p>
+          </li>
+          <li class="step">
+            <img src="./img/noimage.png" alt="" />
+            <p class="idx">2</p>
+            <p class="explain">
+              찬물이 담긴 냄비에 식초,소금을 넣고 메추리알을 삶는다. 물이
+              끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로
+              자른다.
+            </p>
+          </li>
+          <li class="step">
+            <img src="./img/noimage.png" alt="" />
+            <p class="idx">3</p>
+            <p class="explain">
+              찬물이 담긴 냄비에 식초,소금을 넣고 메추리알을 삶는다. 물이
+              끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로
+              자른다.
+            </p>
+          </li>
+          <li class="step">
+            <img src="./img/noimage.png" alt="" />
+            <p class="idx">4</p>
+            <p class="explain">
+              찬물이 담긴 냄비에 식초,소금을 넣고 메추리알을 삶는다.
+              물이
+              끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로
+              자른다.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <div class="toList">
+        <span class="cate" id="toListBtn">목록으로</span>
+      </div>
+    </main>
+    
+    
+    <footer id="footer">
+      <div class="footCon">
+        <img src="./img/social_facebook.svg" alt="" />
+        <img src="./img/social_instar.svg" alt="" />
+        <img src="./img/social_mail.svg" alt="" />
+      </div>
+    </footer>
+ 
+  </body>
+</html>

@@ -13,7 +13,7 @@
 }
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 :root {
@@ -44,6 +44,7 @@ body {
 main {
   position: relative;
   width: 70%;
+  height: 100%;
   margin: 30px auto 0 auto;
 }
 
@@ -51,9 +52,10 @@ main {
   background-color: var(--main-color);
   color: var(--light-color);
   font-weight: 300;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 10px;
   text-align: center;
+  margin: 15px 15px;
 }
 
 .card {
@@ -65,9 +67,12 @@ main {
 }
 
 footer {
-  position: relative;
-  transform: translateY(-100%);
-  padding-top: 20px;
+  position: fixed;
+  /* transform: translateY(-100%); */
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  margin: 5px 0;
 }
 
 .footCon {
@@ -79,5 +84,7 @@ footer {
 }
 
 .footCon > img {
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
