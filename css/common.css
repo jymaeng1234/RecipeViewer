@@ -52,7 +52,6 @@ main {
   color: var(--light-color);
   font-weight: 300;
   padding: 5px;
-  margin: 10px;
   border-radius: 10px;
   text-align: center;
 }
