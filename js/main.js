@@ -9,17 +9,25 @@ const $categorySoup = document.getElementById("category4");
 const $categoryMain = document.getElementById("category5");
 const $categoryDessert = document.getElementById("category6");
 const $categoryOther = document.getElementById("category7");
-
 const $cardListCon = document.getElementById("cardListCon");
+const $recipeCount = document.getElementById("recipeCount");
 
+let pageSize = 9;
 let page = 1;
 let totalResults = 0;
-let groupSize = 5;
+let groupSize = 6;
 let currentPage = 1;
 
 //페이지네이션을 위한 변수
 let currentCategory = "반찬";
 let currentQuery = null;
+
+const renderCount = (count) => {
+  totalResults = count;
+  $recipeCount.innerHTML = `
+          <p id="count">${Number(count).toLocaleString()}</p>
+          <p>개의 레시피</p>`;
+};
 
 const renderRecipes = (recipeList) => {
   const recipeHtml = recipeList.map((recipe) => createHtml(recipe)).join("");
@@ -32,36 +40,30 @@ const createHtml = (recipe) => {
   let calorie = recipe.INFO_ENG || "정보 없음";
   let category = recipe.RCP_PAT2 || "정보 없음";
   let recipeIdx = recipe.RCP_SEQ || "-1";
+  let urlToDetail = `/detail2.html?RCP_NM=${title}`;
 
-  return `<div class="card"  id="card${recipeIdx}">
-            <img src="${urlToImage}" alt="" />
-            <h3>${title}</h3>
-            <div>
-              <strong>${calorie}kcal</strong>
-              <p class="cate">${category}</p>
-            </div>
-          </div>`;
+  return ` <li>
+            <div class="card"  id="card${recipeIdx}">
+               <img src="${urlToImage}" alt="" />
+               <h3 id="cardTitle">${title}</h3>
+               <div>
+                 <strong>${calorie}kcal</strong>
+                 <p class="cate">${category}</p>
+               </div>
+               <a class="more" href="${urlToDetail}" target="_blank"></a>
+             </div>
+          </li>`;
+
+  // return `<div class="card"  id="card${recipeIdx}">
+  //           <img src="${urlToImage}" alt="" />
+  //           <h3 id="cardTitle">${title}</h3>
+  //           <div>
+  //             <strong>${calorie}kcal</strong>
+  //             <p class="cate">${category}</p>
+  //           </div>
+  //           <a class="more" href="news.url" target="_blank"></a>
+  //         </div>`;
 };
-
-/*
-const createHtml = (recipe) => {
-  let urlToImage = recipe.ATT_FILE_NO_MK || "./img/noimage.png";
-  let title = recipe.RCP_NM || "메뉴명 없음";
-  let calorie = recipe.INFO_ENG || "정보 없음";
-  let category = recipe.RCP_PAT2 || "정보 없음";
-  let recipeIdx = recipe.RCP_SEQ || "-1";
-
-  return `<div class="card"  id="card${recipeIdx}">
-            <img src="${urlToImage}" alt="" />
-            <h3>${title}</h3>
-            <div>
-              <strong>${calorie}kcal</strong>
-              <p>${category}</p>
-              <a class="recipelink" href="./detail_${recipeIdx}&recipeNme=${title}.html">바로가기</a>
-            </div>
-          </div>`;
-};
-*/
 
 const init = () => {
   loadRecipes();
@@ -74,18 +76,29 @@ const loadRecipes = async (rcp_pat = null, startIdx = 1, endIdx = 9) => {
         ? `${url}/${startIdx}/${endIdx}`
         : `${url}/${startIdx}/${endIdx}/RCP_PAT2=${rcp_pat}`;
 
+    console.log("test", requestUrl);
+
     const res = await fetch(requestUrl);
     const data = await res.json();
-
+    let totalCnt = data.COOKRCP01.total_count;
     recipeList = data.COOKRCP01.row;
+    renderCount(totalCnt);
     renderRecipes(recipeList);
+    pagination();
   } catch (e) {
     console.error(e);
   }
 };
 
-const LoadRecipe = (i) => {
-  switch (i.srcElement.id) {
+const LoadRecipe = (target) => {
+  //카테고리 버튼 스타일 변경
+  const $beforeSelected = document.querySelector(".cateOn");
+  $beforeSelected.classList.toggle("cateOn");
+  $Selected = document.getElementById(target.srcElement.id);
+  $Selected.classList.toggle("cateOn");
+
+  // 레시피 로드
+  switch (target.srcElement.id) {
     case "category1":
       loadRecipes();
       break;
@@ -124,10 +137,54 @@ const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
     const data = await res.json();
 
     recipeList = data.COOKRCP01.row;
+    renderCount();
     renderRecipes(recipeList);
+    pagination();
   } catch (e) {
     console.error(e);
   }
+};
+
+const movePage = (pageNum) => {
+  page = pageNum;
+  currentPage = pageNum;
+  loadRecipes(null, currentQuery, pageNum);
+  console.log("test");
+};
+
+const pagination = () => {
+  let pageGroup = Math.ceil(page / groupSize);
+  let lastPage = Math.min(
+    Math.ceil(totalResults / pageSize),
+    pageGroup * groupSize
+  );
+  let firstPage = (pageGroup - 1) * groupSize + 1;
+  let totalPage = Math.ceil(totalResults / pageSize);
+  let prevGroup = (pageGroup - 2) * groupSize + 1;
+  let nextGroup = pageGroup * groupSize + 1;
+
+  let paginationHtml = `<button class="next" ${
+    pageGroup == 1 ? "disabled" : ""
+  } onClick='movePage(${prevGroup})>이전페이지그룹</button>`;
+
+  paginationHtml += `<button class="next" ${
+    pageGroup == 1 ? "disabled" : ""
+  } onClick='movePage(${currentPage - 1})>이전</button>`;
+
+  for (let i = firstPage; i < lastPage; i++) {
+    paginationHtml += `<button class='${
+      i == currentPage ? "on" : ""
+    }' onClick='movePage(${i})'>${i}</button>`;
+  }
+  paginationHtml += `<button class="next" ${
+    pageGroup * groupSize >= totalPage
+  } onClick='movePage(${currentPage + 1})>다음</button>`;
+
+  paginationHtml += `<button class="next" ${
+    pageGroup * groupSize >= totalPage
+  } onClick='movePage(${nextGroup + 1})>다음페이지그룹</button>`;
+
+  document.querySelector(".pageCon").innerHTML = paginationHtml;
 };
 
 const searchRecipe = (e) => {
@@ -138,7 +195,7 @@ const searchRecipe = (e) => {
 
 const showRullet = () => {};
 
-// init();
+init();
 
 $banner.addEventListener("click", showRullet);
 $search.addEventListener("keydown", searchRecipe);
