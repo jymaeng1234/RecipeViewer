@@ -181,6 +181,10 @@ h2 {
   outline: none;
 }
 
+.pageCon button:hover {
+  background-color: var(--main3-color);
+}
+
 .pageCon button.on {
   background-color: var(--main2-color);
 }

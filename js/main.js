@@ -12,16 +12,17 @@ const $categoryOther = document.getElementById("category7");
 const $cardListCon = document.getElementById("cardListCon");
 const $recipeCount = document.getElementById("recipeCount");
 
+// 카테고리 선택을 위한 변수
+let currentCategory = null;
+
+// 페이지네이션을 위한 변수
 let pageSize = 9;
 let page = 1;
 let totalResults = 0;
 let groupSize = 6;
 let currentPage = 1;
 
-//페이지네이션을 위한 변수
-let currentCategory = "반찬";
-let currentQuery = null;
-
+// 레시피 개수 정보 출력
 const renderCount = (count) => {
   totalResults = count;
   $recipeCount.innerHTML = `
@@ -29,6 +30,7 @@ const renderCount = (count) => {
           <p>개의 레시피</p>`;
 };
 
+// 레시피 목록 출력 (카드)
 const renderRecipes = (recipeList) => {
   const recipeHtml = recipeList.map((recipe) => createHtml(recipe)).join("");
   $cardListCon.innerHTML = recipeHtml;
@@ -40,7 +42,7 @@ const createHtml = (recipe) => {
   let calorie = recipe.INFO_ENG || "정보 없음";
   let category = recipe.RCP_PAT2 || "정보 없음";
   let recipeIdx = recipe.RCP_SEQ || "-1";
-  let urlToDetail = `/detail2.html?RCP_NM=${title}`;
+  let urlToDetail = `/detail.html?RCP_NM=${title}`;
 
   return ` <li>
             <div class="card"  id="card${recipeIdx}">
@@ -53,18 +55,9 @@ const createHtml = (recipe) => {
                <a class="more" href="${urlToDetail}" target="_blank"></a>
              </div>
           </li>`;
-
-  // return `<div class="card"  id="card${recipeIdx}">
-  //           <img src="${urlToImage}" alt="" />
-  //           <h3 id="cardTitle">${title}</h3>
-  //           <div>
-  //             <strong>${calorie}kcal</strong>
-  //             <p class="cate">${category}</p>
-  //           </div>
-  //           <a class="more" href="news.url" target="_blank"></a>
-  //         </div>`;
 };
 
+// 레시피 로드 함수
 const init = () => {
   loadRecipes();
 };
@@ -75,8 +68,6 @@ const loadRecipes = async (rcp_pat = null, startIdx = 1, endIdx = 9) => {
       rcp_pat === null
         ? `${url}/${startIdx}/${endIdx}`
         : `${url}/${startIdx}/${endIdx}/RCP_PAT2=${rcp_pat}`;
-
-    console.log("test", requestUrl);
 
     const res = await fetch(requestUrl);
     const data = await res.json();
@@ -100,30 +91,31 @@ const LoadRecipe = (target) => {
   // 레시피 로드
   switch (target.srcElement.id) {
     case "category1":
-      loadRecipes();
+      currentCategory = null;
       break;
     case "category2":
-      loadRecipes("밥");
+      currentCategory = "밥";
       break;
     case "category3":
-      loadRecipes("반찬");
+      currentCategory = "반찬";
       break;
     case "category4":
-      loadRecipes("국");
+      currentCategory = "국";
       break;
     case "category5":
-      loadRecipes("일품");
+      currentCategory = "일품";
       break;
     case "category6":
-      loadRecipes("후식");
+      currentCategory = "후식";
       break;
     case "category7":
-      loadRecipes("기타");
+      currentCategory = "기타";
       break;
     default:
-      loadRecipes();
+      currentCategory = null;
       break;
   }
+  loadRecipes(currentCategory);
 };
 
 const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
@@ -145,11 +137,17 @@ const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
   }
 };
 
+const searchRecipe = (e) => {
+  if (e.key === "Enter" || e.type === "click") {
+    loadRecipesByName($search.value);
+  }
+};
+
+// 페이지네이션 함수
 const movePage = (pageNum) => {
   page = pageNum;
   currentPage = pageNum;
-  loadRecipes(null, currentQuery, pageNum);
-  console.log("test");
+  loadRecipes(null, pageSize * (pageNum - 1) + 1, pageNum * pageNum);
 };
 
 const pagination = () => {
@@ -187,17 +185,8 @@ const pagination = () => {
   document.querySelector(".pageCon").innerHTML = paginationHtml;
 };
 
-const searchRecipe = (e) => {
-  if (e.key === "Enter") {
-    loadRecipesByName($search.value);
-  }
-};
-
-const showRullet = () => {};
-
 init();
 
-$banner.addEventListener("click", showRullet);
 $search.addEventListener("keydown", searchRecipe);
 $searchBtn.addEventListener("click", searchRecipe);
 $categoryAll.addEventListener("click", LoadRecipe);

@@ -9,7 +9,7 @@ function gotoPage(url) {
   // location.href = url;
 }
 
-$logo.addEventListener("click", gotoPage("/"));
+// $logo.addEventListener("click", gotoPage("/"));
 // $imgFacebook.addEventListener("click", gotoPage("https://www.facebook.com"));
 // $imgInstagram.addEventListener("click", gotoPage("https://www.instagram.com"));
 // $imgMail.addEventListener("click", gotoPage("https://www.gmail.com"));
