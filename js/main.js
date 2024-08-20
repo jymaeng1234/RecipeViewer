@@ -15,13 +15,6 @@ const $recipeCount = document.getElementById("recipeCount");
 // 카테고리 선택을 위한 변수
 let currentCategory = null;
 
-// 페이지네이션을 위한 변수
-let pageSize = 9;
-let page = 1;
-let totalResults = 0;
-let groupSize = 6;
-let currentPage = 1;
-
 // 레시피 개수 정보 출력
 const renderCount = (count) => {
   totalResults = count;
@@ -142,6 +135,13 @@ const searchRecipe = (e) => {
     loadRecipesByName($search.value);
   }
 };
+
+// 페이지네이션을 위한 변수
+let pageSize = 9;
+let page = 1;
+let totalResults = 0;
+let groupSize = 6;
+let currentPage = 1;
 
 // 페이지네이션 함수
 const movePage = (pageNum) => {

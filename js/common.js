@@ -1,4 +1,7 @@
 const API_KEY = config.API_KEY;
+const $imgFacebook = document.getElementById("imgFacebook");
+const $imgInstagram = document.getElementById("imgInstagram");
+const $imgMail = document.getElementById("imgMail");
 const $logo = document.getElementById("logo");
 
 const url = new URL(
@@ -6,10 +9,21 @@ const url = new URL(
 );
 
 function gotoPage(url) {
-  // location.href = url;
+  window.location = url;
 }
 
-// $logo.addEventListener("click", gotoPage("/"));
-// $imgFacebook.addEventListener("click", gotoPage("https://www.facebook.com"));
-// $imgInstagram.addEventListener("click", gotoPage("https://www.instagram.com"));
-// $imgMail.addEventListener("click", gotoPage("https://www.gmail.com"));
+$logo.addEventListener("click", (e) => {
+  return gotoPage("/");
+});
+
+$imgFacebook.addEventListener("click", (e) => {
+  gotoPage("https://www.facebook.com");
+});
+
+$imgInstagram.addEventListener("click", (e) => {
+  gotoPage("https://www.instagram.com");
+});
+
+$imgMail.addEventListener("click", (e) => {
+  gotoPage("https://www.gmail.com");
+});
