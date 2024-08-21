@@ -137,3 +137,8 @@ h3 {
 .toList {
   height: 80px;
 }
+
+#toListBtn:hover {
+  background-color: var(--main3-color);
+  color: black;
+}
