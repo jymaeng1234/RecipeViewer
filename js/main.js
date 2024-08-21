@@ -45,7 +45,7 @@ const createHtml = (recipe) => {
                  <strong>${calorie}kcal</strong>
                  <p class="cate">${category}</p>
                </div>
-               <a class="more" href="${urlToDetail}" target="_blank"></a>
+               <a class="more" href="${urlToDetail}"></a>
              </div>
           </li>`;
 };
