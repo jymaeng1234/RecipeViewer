@@ -19,7 +19,7 @@ let currentCategory = null;
 const renderCount = (count) => {
   totalResults = count;
   $recipeCount.innerHTML = `
-          <p id="count">${Number(count).toLocaleString()}</p>
+          <p id="count">${count ? Number(count).toLocaleString() : "0"}</p>
           <p>개의 레시피</p>`;
 };
 
@@ -45,7 +45,7 @@ const createHtml = (recipe) => {
                  <strong>${calorie}kcal</strong>
                  <p class="cate">${category}</p>
                </div>
-               <a class="more" href="${urlToDetail}"></a>
+               <a class="more" href="${urlToDetail}" target="_blank"></a>
              </div>
           </li>`;
 };
