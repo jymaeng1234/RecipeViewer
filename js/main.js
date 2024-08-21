@@ -121,8 +121,9 @@ const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
     const res = await fetch(requestUrl);
     const data = await res.json();
 
+    let totalCnt = data.COOKRCP01.total_count;
     recipeList = data.COOKRCP01.row;
-    renderCount();
+    renderCount(totalCnt);
     renderRecipes(recipeList);
     pagination();
   } catch (e) {
@@ -132,6 +133,11 @@ const loadRecipesByName = async (rcp_nm = null, startIdx = 1, endIdx = 9) => {
 
 const searchRecipe = (e) => {
   if (e.key === "Enter" || e.type === "click") {
+    if ($search.value === "") {
+      $search.value = "";
+      $search.focus();
+    }
+
     loadRecipesByName($search.value);
   }
 };
